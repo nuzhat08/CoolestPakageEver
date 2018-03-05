@@ -1,31 +1,42 @@
-# Hello, world!
-#
-# This is an example function named 'hello'
-# which prints 'Hello, world!'.
-#
-# You can learn more about package authoring with RStudio at:
-#
-#   http://r-pkgs.had.co.nz/
-#
-# Some useful keyboard shortcuts for package authoring:
-#
-#   Build and Reload Package:  'Ctrl + Shift + B'
-#   Check Package:             'Ctrl + Shift + E'
-#   Test Package:              'Ctrl + Shift + T'
+#' @title Apply a filter to a data.frame
+#'
+#' @param df data.frame
+#'
+#' @export
 
-hello <- function() {
-  print("Hello, world!")
+ggDensity= function(df= mtcars, filter.var= 'cyl', filter.val= 6){
+
+  Filter= paste0(filter.var, "==", filter.val)
+  print(Filter)
+  df2=
+  df %>%
+    filter(Filter)
+
+  ggplot(df2, aes(x= raquate))
+}
+densityPlot <- function(x,y){
+  attach(x)
+  ggplot(x)+
+    geom_density(aes(y))
 }
 
 
-densityPlot <- function(data,variables, outline, fill){
-  attach(data)
-  ggplot(data)+
-    geom_density(aes(variables), outline, fill)
+densityPlot(wine, points)
+
+SamplingDist <- function(samples = 50, sample_size = 100, mean =0, sd =1){
+  if(samples <= 0){
+    stop("The number of samples needs to be greater than zero")
+  }
+  if (sd <0){
+    stop("You cannot have a negative standard deviation ")
+  }
+  sampleMeans <- rep(NA, samples)
+  for (i in 1:samples){
+    x<- rnorm(sample_size, mean = mean, sd= sd)
+    sampleMeans[i] = mean(x)
+  }
+  return(sampleMeans)
 }
 
 
-densityPlot(wine, points, "blue", "cyan")
 
-ggplot(wine)+
-  geom_density(aes(points), colour= "blue", fill= "cyan")
